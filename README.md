@@ -19,6 +19,7 @@ To access the application, open following URL in your web browser [mercans-expor
 Access `/mercans-export-ws/export` API under `Export Resource` with following input parameters:
 
 dynamicConfigurationFileName: `dynamic_non_mandatory_config.json` or `dynamic_config.json`
+
 inputFileName: `input_01.csv`
 
 ![img_1.png](images/img_1.png)
