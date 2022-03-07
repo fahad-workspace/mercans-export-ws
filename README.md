@@ -12,24 +12,18 @@ The application can be packaged using:
 
 The application, packaged as an _uber-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
-To access the application, open following URL in your web browser
-
-```shell script
-http://0.0.0.0:8084/mercans-export-ws/
-```
+To access the application, open following URL in your web browser [mercans-export-ws](http://0.0.0.0:8084/mercans-export-ws/)
 
 ![img_0.png](images/img_0.png)
 
-Access /mercans-export-ws/export API under Export Resource with following input parameters:
+Access `/mercans-export-ws/export` API under `Export Resource` with following input parameters:
 
-```shell script
-dynamicConfigurationFileName: dynamic_non_mandatory_config.json or dynamic_config.json
-inputFileName: input_01.csv
-```
+dynamicConfigurationFileName: `dynamic_non_mandatory_config.json` or `dynamic_config.json`
+inputFileName: `input_01.csv`
 
 ![img_1.png](images/img_1.png)
 
-Click on Execute to get the desired output as API response.
+Click on `Execute` to get the desired output as API response.
 
 ![img_2.png](images/img_2.png)
 
