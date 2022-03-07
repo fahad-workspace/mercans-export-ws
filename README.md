@@ -18,7 +18,7 @@ To access the application, open following URL in your web browser
 http://0.0.0.0:8084/mercans-export-ws/
 ```
 
-![img.png](img.png)
+![img_0.png](images/img_0.png)
 
 Access /mercans-export-ws/export API under Export Resource with following input parameters:
 
@@ -27,11 +27,11 @@ dynamicConfigurationFileName: dynamic_non_mandatory_config.json or dynamic_confi
 inputFileName: input_01.csv
 ```
 
-![img_1.png](img_1.png)
+![img_1.png](images/img_1.png)
 
 Click on Execute to get the desired output as API response.
 
-![img_2.png](img_2.png)
+![img_2.png](images/img_2.png)
 
 ## Sample Output
 
