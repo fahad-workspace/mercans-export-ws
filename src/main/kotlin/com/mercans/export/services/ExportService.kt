@@ -30,13 +30,16 @@ class ExportService {
         var request = Request()
         request.uuid = UUID.randomUUID().toString()
         request.fname = inputFileName
+        // Read dynamic configuration
         val dynamicConfiguration = ObjectMapper().readValue(
             IOHelper.getFileFromResource(dynamicConfigurationFileName), object : TypeReference<DynamicConfiguration>() {}
         )
+        // Validate file name
         if (validateFileNamePattern(dynamicConfiguration, inputFileName, request)) {
             val csvValues = csvReader {
                 autoRenameDuplicateHeaders = true
             }.readAllWithHeader(IOHelper.getFileFromResource(inputFileName))
+            // Transform to request
             request = RequestTransformer.transform(request, csvValues, dynamicConfiguration)
         }
         return request

@@ -44,16 +44,23 @@ object RequestTransformer {
         csvValues.withIndex().forEach { (index, csvValue) ->
             parsingFailedFields = mutableSetOf()
             patternFailedFields = mutableSetOf()
+            // Check for mandatory fields as configured in config file
             if (checkMandatorySourceFields(dynamicConfiguration, csvValue, index)) {
+                // Skip record in case of any mismatch
                 return@forEach
             }
             val payload = Request.Payload()
+            // Extracting mandatory payload root components
             if (extractPayloadRootComponent(payload, csvValue, dynamicConfiguration, index)) {
+                // Skip record in case of any mismatch
                 return@forEach
             }
+            // Extracting data components
             if (extractDataComponent(dynamicConfiguration, csvValue, payload, index)) {
+                // Skip record in case of any mismatch
                 return@forEach
             }
+            // Extracting pay components
             extractPayComponent(csvValue, dynamicConfiguration, payload)
             payloads.add(payload)
         }
@@ -102,6 +109,7 @@ object RequestTransformer {
                 StringUtils.equalsIgnoreCase(field.sourceField, CommonConstant.CONTRACT_WORKER_ID)
             }, dynamicConfiguration.mappings).toString()
             if (StringUtils.isBlank(payload.employeeCode) && StringUtils.equalsIgnoreCase(payload.action, ActionCode.Hire.name)) {
+                // Generate employee code for new hire if missing
                 payload.employeeCode = generateEmployeeCode(csvValue, dynamicConfiguration)
             }
         } catch (ex: Exception) {
@@ -190,6 +198,7 @@ object RequestTransformer {
             }
         }
         if (StringUtils.equalsIgnoreCase(payload.action, ActionCode.Terminate.name) && !data.containsKey(CommonConstant.PERSON_TERMINATION_DATE)) {
+            // Generate termination date if missing
             data[CommonConstant.PERSON_TERMINATION_DATE] = SimpleDateFormat(DynamicConfiguration.GLOBAL_DATE_FORMAT).format(Date())
         }
         return data
@@ -230,6 +239,7 @@ object RequestTransformer {
                     // pass
                 }
             }
+            // Pay component will only be added if all 4 mandatory attributes are present
             if (payComponent.size == 4) {
                 payComponents.add(payComponent)
             }
@@ -287,6 +297,7 @@ object RequestTransformer {
     private fun getCsvValue(csvValue: Map<String, String>, dataSourceField: DynamicConfigurationField, mappings: Map<String, Map<String, String>>): Any {
         val value = validatePattern(csvValue, dataSourceField)
         try {
+            // Read and parse csv value to correct data type
             return when (dataSourceField.dataType) {
                 DataType.Integer -> value.toInt()
                 DataType.Decimal -> value.toDouble()

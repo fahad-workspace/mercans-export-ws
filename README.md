@@ -274,6 +274,13 @@ Click on `Execute` to get the desired output as API response.
 }
 ```
 
+## Additional Configurations
+
+Added `payComponentsRefType` and `payComponentsField` to config to group common compensation type.
+
+      "payComponentsRefType": "compensation_type",
+      "payComponentsField": "currency" / "amount" / "startDate" / "endDate"
+
 ## Related Guides
 
 - REST Client ([guide](https://quarkus.io/guides/rest-client)): Call REST services
