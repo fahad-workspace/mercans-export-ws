@@ -1,0 +1,40 @@
+quarkus:
+  application:
+    name: mercans-export-ws
+  http:
+    port: 8084
+    root-path: /${quarkus.application.name}
+    test-port: 0
+    test-ssl-port: 0
+  log:
+    console:
+      format: '%d{HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n'
+      level: DEBUG
+    file:
+      enable: true
+      format: '%d{HH:mm:ss} %-5p [%c{2.}] (%t) %s%e%n'
+      level: TRACE
+      path: ${user.home}/logs/${quarkus.application.name}/app-${quarkus.application.name}.log
+    level: INFO
+    min-level: TRACE
+  smallrye-openapi:
+    info-contact-email: fahad.sagittarius@gmail.com
+    info-contact-name: Fahad Sarwar
+    info-contact-url: https://www.linkedin.com/in/c2sarwar/
+    info-title: Mercans Export WS
+  swagger-ui:
+    always-include: true
+    path: ${quarkus.http.root-path}
+    show-extensions: true
+    theme: material
+    title: ${quarkus.application.name}
+'%dev':
+  quarkus:
+    log:
+      level: INFO
+      min-level: INFO
+'%test':
+  quarkus:
+    log:
+      level: INFO
+      min-level: INFO
